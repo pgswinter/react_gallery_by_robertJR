@@ -1,25 +1,60 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import GallerySlz from './GallerySlz';
+import { closeButton } from './GallerySlz/styles';
+
 class App extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      isCarousel: true,
+    };
+  }
+
+  // componentDidMount() {
+  //   document.addEventListener('mousedown', this.handleClickOutside);
+  // }
+
+  // componentWillUnmount() {
+  //   document.removeEventListener('mousedown', this.handleClickOutside);
+  // }
+
+  removeCarousel = () => {
+    const isIt = this.state.isCarousel;
+    this.setState({
+        isCarousel: !isIt,
+    })
+  }
+
+  // setWrapperRef = (node) => {
+  //   this.wrapperRef = node;
+  // }
+
+  // handleClickOutside = (event) => {
+  //   if(this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+  //     this.removeCarousel();
+  //   }
+  // }
+
   render() {
+    const {isCarousel} = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        {
+          isCarousel ? 
+          <React.Fragment>
+            <button style={closeButton} onClick={this.removeCarousel}>
+              x
+            </button>
+            <GallerySlz
+              // ref={this.setWrapperRef}
+            />
+          </React.Fragment>
+          :
+          null
+        }
       </div>
     );
   }
